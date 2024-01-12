@@ -30,6 +30,8 @@ module.exports = {
     },
 
     async index(req, res) {
+
+        console.log(process.env.DB_USERNAME)
        
         const produtos = await Produto.findAll()
 
