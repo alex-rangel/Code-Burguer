@@ -36,7 +36,7 @@ module.exports = {
                 nome: user.nome,
                 email: user.email,
                 admin: user.admin,
-                token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '1h'})
+                token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '7d'})
             })
     
     }

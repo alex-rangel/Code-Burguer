@@ -6,7 +6,7 @@ class Produtos extends Model{
         super.init({
             nome: DataTypes.STRING,
             preco: DataTypes.INTEGER,
-            categoria: DataTypes.STRING,
+            categoria_id: DataTypes.INTEGER,
             imagem: DataTypes.STRING,
             url: {
                 type: DataTypes.VIRTUAL,
@@ -17,6 +17,10 @@ class Produtos extends Model{
             sequelize
         })
 
+    }
+
+    static associate(models) {
+        this.belongsTo(models.Categorias, {foreignKey: 'categoria_id', as: 'categoria' })
     }
 
 }
