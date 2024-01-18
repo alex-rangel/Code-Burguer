@@ -21,6 +21,7 @@ module.exports = {
 
             req.Userid = decoded.id
             req.Username = decoded.nome
+            
 
             return next()
         })

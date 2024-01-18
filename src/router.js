@@ -9,6 +9,7 @@ const UserController = require('./app/controllers/UserController')
 const LoginController = require('./app/controllers/LoginController')
 const ProdutosController = require('./app/controllers/produtosController')
 const CategoriasController = require('./app/controllers/CategoriasControllers')
+const PedidosController = require('./app/controllers/PedidosControllers')
 
 const altenticacao = require('./app/middleware/autenticacao').autenticacao
 
@@ -23,6 +24,8 @@ rotas.post('/produtos', upload.single('file') ,ProdutosController.store)
 rotas.get('/produtos',ProdutosController.index)
 
 rotas.post('/categoria', CategoriasController.store)
+
+rotas.post('/pedidos', PedidosController.store)
 
 
 
