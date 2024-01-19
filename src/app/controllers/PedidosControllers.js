@@ -62,5 +62,26 @@ module.exports = {
        return res.json(PedidoCriado)
     },
 
+    
+    async index(req, res) {
+        
+        const listaPedidos = await Pedidos.find()
+
+        return res.status(200).json(listaPedidos)
+    },
+
+    async update(req, res) {
+        const{id} = req.params
+        const { status } = req.body
+
+        try{
+        const PedidoAtualizado = await Pedidos.updateOne({_id: id}, { status })
+        }catch(err) {
+            return res.status(400).json({error:err.menssage})
+        }
+        
+        return res.status(200).json({menssage: "pedido atualizado com sucesso"})
+    }
+
       
 }

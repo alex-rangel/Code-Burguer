@@ -26,7 +26,8 @@ rotas.get('/produtos',ProdutosController.index)
 rotas.post('/categoria', CategoriasController.store)
 
 rotas.post('/pedidos', PedidosController.store)
-
+rotas.get('/pedidos', PedidosController.index)
+rotas.put('/pedidos/:id', PedidosController.update)
 
 
 
