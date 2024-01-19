@@ -22,12 +22,13 @@ rotas.use(altenticacao)
 
 rotas.post('/produtos', upload.single('file') ,ProdutosController.store)
 rotas.get('/produtos',ProdutosController.index)
+rotas.put('/produtos/:id', upload.single('file') ,ProdutosController.update)
 
 rotas.post('/categoria', CategoriasController.store)
 
 rotas.post('/pedidos', PedidosController.store)
 rotas.get('/pedidos', PedidosController.index)
-rotas.put('/pedidos/:id', PedidosController.update)
+rotas.put('/pedidos/:Id', PedidosController.update)
 
 
 

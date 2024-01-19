@@ -1,4 +1,5 @@
 const Categorias = require('../models/Categorias')
+const User = require('../models/User')
 const yup = require('yup')
 
 module.exports = {
@@ -12,6 +13,14 @@ module.exports = {
         await Schema.validateSync(req.body, {abortEarly: false})
         }catch(err){
             return res.status(400).json({errado: err.message})
+        }
+
+        const id = req.Userid
+
+        const usuario = await User.findByPk(id)
+
+        if(!(usuario.admin)){
+            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
         }
 
         const { nome } = req.body

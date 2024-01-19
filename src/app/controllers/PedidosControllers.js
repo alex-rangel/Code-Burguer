@@ -1,5 +1,6 @@
 const Pedidos = require('../models/Pedidos')
 const Produto = require('../models/Produtos')
+const User = require('../models/User')
 const yup = require('yup')
 
 module.exports = {
@@ -71,11 +72,19 @@ module.exports = {
     },
 
     async update(req, res) {
-        const{id} = req.params
+        const{Id} = req.params
         const { status } = req.body
 
+        const id = req.Userid
+
+        const usuario = await User.findByPk(id)
+
+        if(!(usuario.admin)){
+            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        }
+
         try{
-        const PedidoAtualizado = await Pedidos.updateOne({_id: id}, { status })
+        const PedidoAtualizado = await Pedidos.updateOne({_id: Id}, { status })
         }catch(err) {
             return res.status(400).json({error:err.menssage})
         }
