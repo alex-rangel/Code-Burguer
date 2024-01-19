@@ -9,6 +9,7 @@ module.exports = {
             nome: yup.string().required("A informação do nome é obrigatorio"),
             preco: yup.number().required(),
             categoria_id: yup.number().required(),
+            oferta: yup.boolean(),
         })
 
         try{
@@ -26,13 +27,14 @@ module.exports = {
         }
 
         const {filename: imagem} = req.file
-        const {nome, preco, categoria_id} = req.body
+        const {nome, preco, categoria_id,oferta} = req.body
         
         const newProduto = await Produto.create({
             nome,
             preco,
             categoria_id,
             imagem,
+            oferta,
         })
         
         res.status(200).json(newProduto)
@@ -84,6 +86,7 @@ module.exports = {
             preco,
             categoria_id,
             imagem,
+            oferta,
             }, 
             {where: {id}}
         )

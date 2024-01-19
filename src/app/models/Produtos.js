@@ -13,7 +13,9 @@ class Produtos extends Model{
                 get() {
                     return `http://localhost:${process.env.PORT}/image-product/${this.imagem}`
             }
-        }}, {
+        },
+            oferta: DataTypes.BOOLEAN
+    }, {
             sequelize
         })
 

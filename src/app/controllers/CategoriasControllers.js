@@ -23,6 +23,7 @@ module.exports = {
             return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
         }
 
+        const {filename: imagem} = req.file
         const { nome } = req.body
 
         const categoriaExistente = await Categorias.findOne({where: { nome }})
@@ -33,11 +34,41 @@ module.exports = {
         }
         
         const novaCategoria = await Categorias.create({
-            nome
+            nome,
+            imagem
         })
         
         res.status(200).json(novaCategoria)
     },
+
+    async update(req, res) {
+        const{id} = req.params
+        
+        const Id = req.Userid
+
+        const usuario = await User.findByPk(Id)
+
+        if(!(usuario.admin)){
+            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        }
+
+        let imagem
+        if(req.file) {
+            let imagem = req.file.filename
+        }
+        
+        const {nome} = req.body
+
+        
+        await Categorias.update(
+            { 
+            nome
+            }, 
+            {where: {id}}
+        )
+        
+        return res.status(200).json({menssage: "Produto atualizado com sucesso"})
+    }
 
       
 }
