@@ -13,6 +13,6 @@ app.use(rotas)
 app.use('/image-product' ,express.static(resolve(__dirname, '..', 'upload')))
 app.use('/image-categoria' ,express.static(resolve(__dirname, '..', 'upload')))
 
-app.listen(process.env.PORT, () => {
+app.listen(4000, () => {
     console.log('servidor rodando')
 })
