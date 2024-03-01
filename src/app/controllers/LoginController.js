@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const yup = require('yup')
-const jwt = require('jsonwebtoken')
+//const jwt = require('jsonwebtoken')
 
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
                 nome: user.nome,
                 email: user.email,
                 admin: user.admin,
-                token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '7d'})
+                //token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '7d'})
             })
     
     }

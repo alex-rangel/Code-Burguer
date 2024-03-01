@@ -18,7 +18,7 @@ const mongoose = require('mongoose')
 
     const mongoConnection = mongoose.connect('mongodb://localhost:27017/Codeburguer')
     .then(() => console.log("banco de dados conectado"))
-    }
+     }
 
 
 module.exports = conexao()
