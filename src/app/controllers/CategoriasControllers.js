@@ -68,7 +68,14 @@ module.exports = {
         )
         
         return res.status(200).json({menssage: "Produto atualizado com sucesso"})
-    }
+    },
+
+    async index(req, res) {
+        
+        const Categories = await Categorias.findAll()
+
+        return res.status(200).json(Categories)
+    },
 
       
 }

@@ -26,6 +26,7 @@ rotas.put('/produtos/:id', upload.single('file') ,ProdutosController.update)
 
 rotas.post('/categoria',upload.single('file'), CategoriasController.store)
 rotas.put('/categoria/:id', upload.single('file') ,CategoriasController.update)
+rotas.get('/categoria',CategoriasController.index)
 
 
 rotas.post('/pedidos', PedidosController.store)

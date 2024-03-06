@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const yup = require('yup')
-//const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 
 module.exports = {
@@ -31,13 +31,13 @@ module.exports = {
             return res.status(400).json({error: "email ou senha estão incorreto"})
         }
 
-        return res.status(200).json({
+        return(res.status(200).json({
                 id: user.id, 
                 nome: user.nome,
                 email: user.email,
                 admin: user.admin,
-                //token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '7d'})
+                token: jwt.sign({id:user.id, nome:user.nome}, process.env.JWT_KEY, { expiresIn: '7d'})
             })
-    
+        )
     }
 }

@@ -22,7 +22,7 @@ module.exports = {
         })
 
         if(user){
-           return res.status(400).json({error:"O email informado ja existe"})
+           return res.status(409).json({error:"O email informado ja existe"})
         }
 
         const newUser = await User.create({
