@@ -44,11 +44,11 @@ module.exports = {
 
         const id = req.Userid
 
-        const usuario = await User.findByPk(id)
+        // const usuario = await User.findByPk(id)
 
-        if(!(usuario.admin)){
-            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
-        }
+        // if(!(usuario.admin)){
+        //     return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        // }
        
         const produtos = await Produto.findAll({
             include: {
