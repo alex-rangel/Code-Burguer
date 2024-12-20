@@ -40,5 +40,22 @@ module.exports = {
                 admin,
             })
     
-    }
+    },
+
+    async index(req, res) {
+
+        const id = req.Userid
+
+        // const usuario = await User.findByPk(id)
+
+        // if(!(usuario.admin)){
+        //     return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        // }
+       
+        const users = await User.findAll()
+
+        return res.status(200).json(users)
+
+    },
+
 }

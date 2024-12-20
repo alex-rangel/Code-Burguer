@@ -15,6 +15,7 @@ const altenticacao = require('./app/middleware/autenticacao').autenticacao
 
 
 rotas.post('/user', UserController.store)
+rotas.get('/user', UserController.index)
 
 rotas.post('/login', LoginController.store)
 
@@ -27,6 +28,7 @@ rotas.get('/categoria',CategoriasController.index)
 rotas.post('/produtos', upload.single('file') ,ProdutosController.store)
 rotas.get('/produtos',ProdutosController.index)
 rotas.put('/produtos/:id', upload.single('file') ,ProdutosController.update)
+rotas.get('/produtos/:id', ProdutosController.indexById)
 
 rotas.post('/pedidos', PedidosController.store)
 rotas.get('/pedidos', PedidosController.index)

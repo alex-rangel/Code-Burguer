@@ -4,7 +4,7 @@ const yup = require('yup')
 
 module.exports = {
     async store(req, res) {
-        
+
         const Schema = yup.object().shape({
             nome: yup.string().required("A informação do nome é obrigatorio"),
             preco: yup.number().required(),
@@ -12,23 +12,23 @@ module.exports = {
             oferta: yup.boolean(),
         })
 
-        try{
-        await Schema.validateSync(req.body, {abortEarly: false})
-        }catch(err){
-            return res.status(400).json({errado: err.message})
+        try {
+            await Schema.validateSync(req.body, { abortEarly: false })
+        } catch (err) {
+            return res.status(400).json({ errado: err.message })
         }
 
         const id = req.Userid
 
         const usuario = await User.findByPk(id)
 
-        if(!(usuario.admin)){
-            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        if (!(usuario.admin)) {
+            return res.status(400).json({ menssage: "Apagina so pode ser acessada por um administrador" })
         }
 
-        const {filename: imagem} = req.file
-        const {nome, preco, categoria_id,oferta} = req.body
-        
+        const { filename: imagem } = req.file
+        const { nome, preco, categoria_id, oferta } = req.body
+
         const newProduto = await Produto.create({
             nome,
             preco,
@@ -36,7 +36,7 @@ module.exports = {
             imagem,
             oferta,
         })
-        
+
         res.status(200).json(newProduto)
     },
 
@@ -44,12 +44,8 @@ module.exports = {
 
         const id = req.Userid
 
-        // const usuario = await User.findByPk(id)
+        const usuario = await User.findByPk(id)
 
-        // if(!(usuario.admin)){
-        //     return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
-        // }
-       
         const produtos = await Produto.findAll({
             include: {
                 association: 'categoria',
@@ -61,38 +57,57 @@ module.exports = {
 
     },
 
-    async update(req, res) {
-        const{id} = req.params
-        
+    async indexById(req, res) {
+
+        const { id } = req.params
+
         const Id = req.Userid
 
         const usuario = await User.findByPk(Id)
 
-        if(!(usuario.admin)){
-            return res.status(400).json({menssage: "Apagina so pode ser acessada por um administrador"})
+        const produto = await Produto.findByPk(id)
+
+        return res.status(200).json(produto)
+    },
+
+    async update(req, res) {
+        const { id } = req.params
+
+        const Id = req.Userid
+
+        const usuario = await User.findByPk(Id)
+
+        if (!(usuario.admin)) {
+            return res.status(400).json({ menssage: "Apagina so pode ser acessada por um administrador" })
         }
 
         let imagem
-        if(req.file) {
-            let imagem = req.file.filename
+        if (req.file) {
+            imagem = req.file.filename
+            console.log('foi')
         }
-        
-        const {nome, preco, categoria_id} = req.body
 
-        
-        await Produto.update(
-            { 
-            nome,
-            preco,
-            categoria_id,
-            imagem,
-            oferta,
-            }, 
-            {where: {id}}
+        console.log(imagem)
+
+        const { nome, preco, categoria_id, oferta } = req.body
+
+
+        const atualizado = await Produto.update(
+            {
+                nome,
+                preco,
+                categoria_id,
+                imagem,
+                oferta,
+            },
+            { where: { id } }
         )
-        
-        return res.status(200).json({menssage: "Produto atualizado com sucesso"})
+
+        console.log(atualizado)
+        console.log('foi')
+
+        return res.status(200).json({ menssage: "Produto atualizado com sucesso" })
     }
 
-      
+
 }
